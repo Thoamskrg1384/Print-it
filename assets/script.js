@@ -40,20 +40,20 @@ const slides = [
 
 // Fonction générale d'affichage de la slide
 function displaySlide() {
-  const slide = slides[counterSlide];
-  // Affichage de l'image de la slide
+  const slide = slides[counterSlide]; // Prend l'indice de la slide actuelle "[0]" et récupère ses données à partir du tableau [slides]
+  // Mise à jour de l'affichage de l'image de la slide
   sliderImg.setAttribute("src", `./assets/images/slideshow/${slide.image}`);
-  // Affichage du texte de la slide
+  // Mise à jour de l'affichage du texte de la slide
   sliderContent.innerHTML = `${slide.tagLine}`;
 }
 
-// Création des dots en fonction du nombre de slides
+// Création des dots en fonction du nombre de slides dans le carroussel
 function createDots() {
   for (let i = 0; i < slides.length; i++) {
     const newDot = document.createElement("span");
     newDot.classList.add("dot");
     dots.append(newDot);
-    // action au click sur les dots
+    // permet le changement de la slide au click sur le dot
     newDot.addEventListener("click", () => {
       counterSlide = i;
       displaySlide();
@@ -62,19 +62,20 @@ function createDots() {
   }
 }
 
-// Remplissage du dot en fonction de la slide
+// Remplissage du dot en fonction de la slide pour mettre en avant la slide affichée
 function updateDots() {
   const allDots = document.querySelectorAll(".dot");
   allDots.forEach((dot, i) => {
     if (i === counterSlide) {
+      // Appelle une classe css sur le dot sélectionné
       dot.classList.add("dot_selected");
     } else {
-      dot.classList.remove("dot_selected");
+      dot.classList.remove("dot_selected"); // Et supprime la classe sur les autres dots
     }
   });
 }
 
-// Action au click sur le bouton de droite (slide suivante)
+// Action au click sur le bouton de droite (slide suivante) pour mettre à jour l'indice de la slide et afficher la suivante
 arrowRight.addEventListener("click", (e) => {
   counterSlide = counterSlide + 1;
   console.log(e.target);
@@ -86,7 +87,7 @@ arrowRight.addEventListener("click", (e) => {
   updateDots();
 });
 
-// Action au click sur le bouton de gauche (slide précédente)
+// Action au click sur le bouton de gauche (slide précédente) pour mettre à jour l'indice de la slide et afficher la précédente
 arrowLeft.addEventListener("click", (e) => {
   counterSlide = counterSlide - 1;
   console.log(e.target);
